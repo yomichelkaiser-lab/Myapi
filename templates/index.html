@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Kategoriler ve Hesaplar</title>
+</head>
+<body>
+    <h1>Kategoriler</h1>
+    <a href="{{ url_for('kategori_ekle') }}">Yeni Kategori Ekle</a> |
+    <a href="{{ url_for('hesap_ekle') }}">Yeni Hesap Ekle</a>
+
+    {% for kategori in kategoriler %}
+        <h2>{{ kategori.isim }}</h2>
+        <ul>
+            {% for hesap in kategori.hesaplar %}
+                <li>{{ hesap.hesap }}</li>
+            {% else %}
+                <li><i>Bu kategoride hesap yok.</i></li>
+            {% endfor %}
+        </ul>
+        <p>API: <code>/api/kategori/{{ kategori.id }}/hesaplar</code></p>
+        <hr/>
+    {% else %}
+        <p><i>Henüz kategori yok.</i></p>
+    {% endfor %}
+</body>
+</html>
